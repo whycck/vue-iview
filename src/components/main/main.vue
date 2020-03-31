@@ -30,6 +30,11 @@ export default {
     return {
       collapsed: false,
     }
+  },
+  computed: {
+    menuList () {
+      return this.$store.getters.menuList
+    }
   }
 }
 </script>
