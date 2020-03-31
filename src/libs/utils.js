@@ -1,8 +1,11 @@
 import Cookies from 'js-cookie'
 import config from '@/config'
-import { forEach, hasOneOf, objEqual } from '@/libs/tools'
+import { hasOneOf, objEqual } from '@/libs/tools'
 
-const { title, cookieExpires, } = config
+const {
+  title,
+  cookieExpires,
+} = config
 
 export const TOKEN_KEY = 'token'
 
@@ -24,15 +27,25 @@ const showThisMenuEle = (item, access) => {
 }
 
 export const getMenuByRouter = (list, access) => {
-  let res = []
-  forEach(list, item => {
+  const res = []
+  list.forEach(item => {
     if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
-      let obj = {
+      const obj = {
         icon: (item.meta && !item.meta.hideInMenu),
         name: item.name,
         meta: item.meta
       }
-      if
+      if ((hasChild(item) || (item.meta && item.meta.showAlways)) && showThisMenuEle(item, access)) {
+        obj.children = getMenuByRouter(item.children, access)
+      }
+      if (item.meta && item.meta.href) obj.href = item.meta.href
+      if (showThisMenuEle(item, access)) res.push(obj)
     }
   })
+  return res
+}
+
+export const showTitle = item => {
+  const { title } = item.meta
+  return title || item.name
 }
