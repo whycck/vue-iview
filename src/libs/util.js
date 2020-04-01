@@ -31,7 +31,7 @@ export const getMenuByRouter = (list, access) => {
   list.forEach(item => {
     if (!item.meta || (item.meta && !item.meta.hideInMenu)) {
       const obj = {
-        icon: (item.meta && !item.meta.hideInMenu),
+        icon: (item.meta && item.meta.icon),
         name: item.name,
         meta: item.meta
       }

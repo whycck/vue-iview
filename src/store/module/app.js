@@ -1,4 +1,4 @@
-import { getMenuByRouter } from '@/libs/utils'
+import { getMenuByRouter } from '@/libs/util'
 import routers from '@/router/routers'
 
 export default {

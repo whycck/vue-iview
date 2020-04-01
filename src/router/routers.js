@@ -21,13 +21,21 @@ export default [
     path: '/',
     name: '_home',
     component: Main,
+    redirect: '/home',
     meta: {
-
+      hideInMenu: true,
+      notCache: true
     },
     children: [
       {
         path: '/home',
         name: 'home',
+        meta: {
+          hideInMenu: true,
+          title: '首页',
+          notCache: true,
+          icon: 'md-home'
+        },
         component: () => import('@/view/home/home.vue')
       },
     ]
@@ -37,14 +45,15 @@ export default [
     name: 'communication',
     component: Main,
     meta: {
-
+      title: '组件通讯',
+      icon: '_bear'
     },
     children: [
       {
         path: 'v-model',
         name: 'v-model',
         meta: {
-          icon: '',
+          icon: '_bear',
           title: 'v-model子组件修改父组件'
         },
         component: () => import('@/view/communication/v-model/v-model.vue')
@@ -53,10 +62,30 @@ export default [
         path: 'sync',
         name: 'sync',
         meta: {
-          icon: '',
+          icon: '_bear',
           title: 'sync子组件修改父组件'
         },
         component: () => import('@/view/communication/sync/sync.vue')
+      }
+    ]
+  },
+  {
+    path: '/join',
+    name: 'join',
+    component: Main,
+    meta: {
+      title: '加入我们',
+      icon: 'ios-body'
+    },
+    children: [
+      {
+        path: 'join_page',
+        name: 'join_page',
+        meta: {
+          icon: '_qq',
+          title: '联系方式'
+        },
+        component: () => import('@/view/join-page/join-page.vue')
       }
     ]
   }
