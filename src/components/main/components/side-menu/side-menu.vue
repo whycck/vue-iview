@@ -46,7 +46,7 @@ export default {
   methods: {
     handleSelect (name) {
       // return this.$route.matched
-      console.log(name)
+      // console.log(name)
       this.$emit('on-select', name)
     }
   }

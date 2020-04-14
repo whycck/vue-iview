@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '@/store'
+// import store from '@/store'
 
 class HttpRequest {
   constructor(baseUrl) {
@@ -11,13 +11,13 @@ class HttpRequest {
     const config = {
       baseURL: this.baseUrl,
       headers: {
-
+        //
       }
     }
     return config
   }
 
-  destory (url) {
+  destroy (url) {
     delete this.queue[url]
     if (!Object.keys(this.queue).length) {
       // Spin.hide()
@@ -27,7 +27,7 @@ class HttpRequest {
   interceptors (instance, url) {
     // 请求拦截
     instance.interceptors.request.use(config => {
-      // 添加全局的loading
+      // 添加全局的loading...
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
       }
@@ -36,14 +36,13 @@ class HttpRequest {
     }, error => {
       return Promise.reject(error)
     })
-
     // 响应拦截
     instance.interceptors.response.use(res => {
-      this.destory(url)
+      this.destroy(url)
       const { data, status } = res
       return { data, status }
     }, error => {
-      this.destory(url)
+      this.destroy(url)
       let errorInfo = error.response
       if (!errorInfo) {
         const { request: { statusText, status }, config } = JSON.parse(JSON.stringify(error))
@@ -53,17 +52,16 @@ class HttpRequest {
           request: { responseURL: config.url }
         }
       }
-      // todo: add addErrorLog
+      // addErrorLog(errorInfo)
       return Promise.reject(error)
     })
   }
 
-  request(options) {
+  request (options) {
     const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
     this.interceptors(instance, options.url)
     return instance(options)
   }
 }
-
 export default HttpRequest

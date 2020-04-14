@@ -26,6 +26,10 @@ const showThisMenuEle = (item, access) => {
   } else return true
 }
 
+/**
+ * @param {Array} list 通过路由列表得到菜单列表
+ * @param {*} access
+ */
 export const getMenuByRouter = (list, access) => {
   const res = []
   list.forEach(item => {
@@ -48,4 +52,18 @@ export const getMenuByRouter = (list, access) => {
 export const showTitle = item => {
   const { title } = item.meta
   return title || item.name
+}
+
+/**
+ * 从URL中解析参数
+ * @param {String} url
+ */
+export const getParams = url => {
+  const keyValueArr = url.split('?')[1].split('&')
+  const params = {}
+  keyValueArr.forEach(item => {
+    const keyValue = item.split('=')
+    params[keyValue[0]] = keyValue[1]
+  })
+  return params
 }
