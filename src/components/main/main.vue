@@ -9,7 +9,11 @@
       class="left-sider"
       :style="{overflow: 'hidden'}"
     >
-      <side-menu :menu-list="menuList" @on-select="turnToPage"></side-menu>
+      <side-menu :menu-list="menuList" @on-select="turnToPage">
+        <div class="logo-con">
+          <img :src="maxLogo" />
+        </div>
+      </side-menu>
     </Sider>
     <Layout>
       <Header class="header-con"></Header>
@@ -30,6 +34,8 @@
 <script>
 import SideMenu from './components/side-menu'
 
+import maxLogo from '@/assets/images/logo.jpg'
+
 import './main.less'
 
 export default {
@@ -40,6 +46,7 @@ export default {
   data () {
     return {
       collapsed: false,
+      maxLogo
     }
   },
   computed: {
