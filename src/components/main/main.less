@@ -16,14 +16,20 @@
 
   .ivu-menu {
     background-color: #001529;
+    &-item {
+      color: rgba(0, 0, 0, 0.7);
+    }
+    &-submenu {
+      color: rgba(0, 0, 0, 0);
+    }
   }
 
   .ivu-menu-dark {
-    // background-color: #001529;
-
-    .ivu-menu-submenu:hover, .ivu-menu-item:hover {
-      color: #fff;
-      background-color: #001529;
+    .ivu-menu-submenu, .ivu-menu-item {
+      &:hover {
+        color: #fff;
+        background-color: #001529;
+      }
     }
 
     .ivu-menu-opened {

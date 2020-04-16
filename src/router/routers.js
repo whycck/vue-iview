@@ -84,12 +84,12 @@ export default [
     component: Main,
     meta: {
       title: '加入我们',
-      icon: 'ios-body'
+      icon: '_bear'
     },
     children: [
       {
-        path: 'join_page',
-        name: 'join_page',
+        path: 'join-page',
+        name: 'join-page',
         meta: {
           icon: '_qq',
           title: '联系方式'
