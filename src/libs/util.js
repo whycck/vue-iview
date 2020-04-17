@@ -1,9 +1,8 @@
 import Cookies from 'js-cookie'
 import config from '@/config'
-import { hasOneOf, objEqual } from '@/libs/tools'
+import { hasOneOf } from '@/libs/tools'
 
 const {
-  title,
   cookieExpires,
 } = config
 

@@ -97,5 +97,10 @@ export default [
         component: () => import('@/view/join-page/join-page.vue')
       }
     ]
-  }
+  },
+  // {
+  //   path: '/directive',
+  //   name: 'directive',
+  //   component: Main,
+  // }
 ]
