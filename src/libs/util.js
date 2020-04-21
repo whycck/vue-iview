@@ -4,6 +4,7 @@ import { hasOneOf } from '@/libs/tools'
 
 const {
   cookieExpires,
+  title
 } = config
 
 export const TOKEN_KEY = 'token'
@@ -65,4 +66,34 @@ export const getParams = url => {
     params[keyValue[0]] = keyValue[1]
   })
   return params
+}
+
+/**
+ * @param {Array} access 用户数组权限 eg: ['super_admin', 'admin']
+ * @param {*} route 路由列表
+ */
+const hasAccess = (access, route) => {
+  if (route.meta && route.meta.access) return hasOneOf(access, route.meta.access)
+  return true
+}
+
+/**
+ * @param {String} name
+ * @param {Array} access
+ * @param {Array} routes
+ */
+export const canTurnTo = (name, access, routes) => {
+  const routePermissionJudge = list => {
+    return list.some(item => {
+      if (item.children && item.children.length) return routePermissionJudge(item.children)
+      else if (item.name === name) return hasAccess(access, item)
+    })
+  }
+  return routePermissionJudge(routes)
+}
+
+export const setTitle = (routeItem, vm) => {
+  const pageTitle = showTitle(routeItem, vm)
+  const resTitle = pageTitle ? `${title} - ${pageTitle}` : title
+  window.document.title = resTitle
 }
